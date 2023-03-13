@@ -9,10 +9,12 @@ import { getArticles } from './utils/api'
 
 function App() {
   const [articles, setArticles] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     getArticles().then((result) => {
       setArticles(result)
+      setIsLoading(false)
     })
   }, [])
 
@@ -20,7 +22,7 @@ function App() {
     <div className="App">
       <Header />
       <TopicsNav />
-      <Articles articles={articles}/>
+      <Articles articles={articles} isLoading={isLoading}/>
     </div>
   );
 }

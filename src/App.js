@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import {useState, useEffect} from 'react'
+
 import './App.css';
+import Header from './components/Header.jsx'
+import TopicsNav from './components/TopicsNav.jsx'
+import Articles from "./components/Articles.jsx";
+
+import { getArticles } from './utils/api'
 
 function App() {
+  const [articles, setArticles] = useState([])
+
+  useEffect(() => {
+    getArticles().then((result) => {
+      setArticles(result)
+    })
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <TopicsNav />
+      <Articles articles={articles}/>
     </div>
   );
 }

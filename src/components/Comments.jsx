@@ -12,7 +12,6 @@ export default function Comments({ isLoading, setIsLoading }) {
   useEffect(() => {
     getComments(article_id).then((result) => {
       setIsLoading(true);
-      //   console.log(comments[0].comment_id)
       setComments(result);
       setIsLoading(false);
     });
@@ -22,10 +21,15 @@ export default function Comments({ isLoading, setIsLoading }) {
     <h1>Loading...</h1>
   ) : (
     <ul className="comments">
+        <h2>Comments</h2>
       {comments.map((comment) => {
         return (
           <li key={comment.comment_id}>
-            <h2>{comment.comment_id}</h2>
+            <p>{comment.body}</p>
+            <p>{comment.author}</p>
+            <p>{comment.created_at}</p>
+            <p>{comment.votes} likes</p>
+            <p>Like this post </p>
           </li>
         );
       })}

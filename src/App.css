@@ -5,25 +5,45 @@
   list-style: none;
 }
 
+body {
+  background: #f1f1f1;
+}
+
+header,
+ul.articles,
+main.single-article {
+  background: white;
+  border-radius: 5px;
+  border-bottom: 3px solid #999;
+}
+
+ul.articles,
+main.single-article {
+  padding: 15px 20px;
+  margin-bottom: 27px;
+}
+
 button {
   padding: 10px 30px;
-  border: 2px solid #333;
   border-radius: 0;
-  background: none;
+  border: none;
+  background: #333;
+  color: white;
+  font-size: 1rem;
   cursor: pointer;
+  border-radius: 5px;
+  border-bottom: 3px solid #999;
 }
 
 .App {
   max-width: 650px;
   margin: auto;
-  border: 2px solid #c1c1c1;
   padding: 10px;
 }
 
 header {
   padding: 27px 20px;
   display: flex;
-  border: 3px solid orange;
   margin-bottom: 9px;
   display: flex;
   justify-content: space-between;
@@ -41,23 +61,20 @@ ul.topics-nav li {
   cursor: pointer;
 }
 
-ul.articles,
-main.single-article {
-  border: 1px solid red;
-}
-
 ul.articles li {
-  border: 3px solid gray;
-  padding: 27px 20px;
   margin-bottom: 18px;
+  border-bottom: 3px dotted #999;
+  padding-bottom: 18px;
 }
 
 ul.articles li:last-of-type {
   margin-bottom: 0;
+  border-bottom: 0;
 }
 
 ul.articles li p,
-main.single-article section.article p {
+main.single-article section.article p,
+ul.comments li p {
   font-size: .66rem;
   background: #f1f1f1;
   padding: 5px 9px;
@@ -65,12 +82,27 @@ main.single-article section.article p {
   margin: 5px;
 }
 
-main.single-article section.article p:last-of-type {
+main.single-article section.article p:last-of-type,
+ul.comments li p:first-of-type {
   font-size: 1rem;
   background: none;
   padding: 0;
   display: block;
   margin: 0;
+}
+
+ul.comments li p:nth-of-type(2) {
+  margin-left: 0;
+}
+
+ul.comments li {
+  padding: 20px 0;
+  margin-bottom: 9px;
+  border-bottom: 3px dotted #999;
+}
+
+ul.comments li:last-of-type {
+  border-bottom: none;
 }
 
 ul.articles li p:first-of-type,
@@ -100,7 +132,6 @@ ul.articles li button {
 
 ul.comments {
   margin-top: 18px;
-  border: 3px solid yellow;
 }
 
 /* AddComment */

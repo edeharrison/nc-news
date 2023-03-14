@@ -1,13 +1,27 @@
 // Hooks
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 // Components
 import TopicsNav from "./TopicsNav.jsx";
 
-export default function Articles({ articles, setSingleArticle, isLoading }) {
+// Utils
+import { getArticles } from "../utils/api";
+
+export default function Articles({ setSingleArticle, isLoading, setIsLoading }) {
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    getArticles().then((result) => {
+      setIsLoading(true);
+      setArticles(result);
+      setIsLoading(false);
+    });
+  }, []);
+
   return isLoading ? (
     <h1>Loading...</h1>
-    ) : (
+  ) : (
     <>
       <TopicsNav />
       <ul className="articles">

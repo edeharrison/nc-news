@@ -41,7 +41,8 @@ ul.topics-nav li {
   cursor: pointer;
 }
 
-ul.articles {
+ul.articles,
+main.single-article {
   border: 1px solid red;
 }
 
@@ -55,7 +56,8 @@ ul.articles li:last-of-type {
   margin-bottom: 0;
 }
 
-ul.articles li p {
+ul.articles li p,
+main.single-article section.article p {
   font-size: .66rem;
   background: #f1f1f1;
   padding: 5px 9px;
@@ -63,7 +65,16 @@ ul.articles li p {
   margin: 5px;
 }
 
-ul.articles li p:first-of-type {
+main.single-article section.article p:last-of-type {
+  font-size: 1rem;
+  background: none;
+  padding: 0;
+  display: block;
+  margin: 0;
+}
+
+ul.articles li p:first-of-type,
+main.single-article section.article p:first-of-type {
   margin-left: 0;
   margin-top: 9px;
 }
@@ -71,11 +82,32 @@ ul.articles li p:first-of-type {
 ul.articles li img {
   width: 300px;
   height: 200px;
-  background: #f1f1f1;
+  margin-top: 9px;
+}
+
+main.single-article section.article img {
+  width: 100%;
+  height: auto;
   margin-top: 9px;
 }
 
 ul.articles li button {
   margin-top: 9px;
   display: block;
+}
+
+/* Comments */
+
+form.comments {
+  width: 100%;
+  border: 3px solid purple;
+  margin-top: 18px;
+}
+
+form.comments input[type="textarea"] {
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 0;
+  margin-bottom: 18px;
+  min-height: 54px;
 }

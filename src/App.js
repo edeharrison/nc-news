@@ -1,28 +1,57 @@
-import {useState, useEffect} from 'react'
+// Hooks
+import { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 
-import './App.css';
-import Header from './components/Header.jsx'
-import TopicsNav from './components/TopicsNav.jsx'
+// Stylesheets
+import "./App.css";
+
+// Components
+import Header from "./components/Header.jsx";
 import Articles from "./components/Articles.jsx";
+import SingleArticle from "./components/SingleArticle.jsx";
 
-import { getArticles } from './utils/api'
+// Utils
+import { getArticles } from "./utils/api";
 
 function App() {
-  const [articles, setArticles] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [articles, setArticles] = useState([]);
+  const [singleArticle, setSingleArticle] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getArticles().then((result) => {
-      setArticles(result)
-      setIsLoading(false)
-    })
-  }, [])
+      setIsLoading(true);
+      setArticles(result);
+      setIsLoading(false);
+    });
+  }, []);
 
   return (
     <div className="App">
       <Header />
-      <TopicsNav />
-      <Articles articles={articles} isLoading={isLoading}/>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Articles 
+              articles={articles} 
+              setSingleArticle={setSingleArticle} 
+              isLoading={isLoading} 
+            />
+          }
+        />
+        <Route
+          path="/articles/:article_id"
+          element={
+            <SingleArticle
+              singleArticle={singleArticle}
+              setSingleArticle={setSingleArticle}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 }

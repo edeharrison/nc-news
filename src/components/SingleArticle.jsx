@@ -1,17 +1,42 @@
-export default function SingleArticle({ singleArticle, isLoading }) {
-  //   return isLoading ? (
-  //     <h1>Loading...</h1>
-  //   ) : (
-  //     <main className="single-article">
-  //       <h2>{article.title}</h2>
-  //       <p>{article.author}</p>
-  //       <p>{article.topic}</p>
-  //       <p>{article.created_at}</p>
-  //       <p>{article.votes} likes</p>
-  //       <p>{article.comment_count} comments</p>
-  //       <img src={article.article_img_url} alt="article thumbnail image" />
-  //     </main>
-  //   );
+// Hooks
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-  console.log(singleArticle)
+// Components
+import Comments from './Comments.jsx'
+
+// Utils
+import { getSingleArticle } from "../utils/api";
+
+export default function SingleArticle({ singleArticle, setSingleArticle, isLoading, setIsLoading }) {
+  const { article_id } = useParams();
+
+  useEffect(() => {
+    getSingleArticle(article_id).then((result) => {
+      setIsLoading(true);
+      setSingleArticle(result);
+      setIsLoading(false);
+    });
+  }, [singleArticle]);
+
+  return isLoading ? (
+    <h1>Loading...</h1>
+  ) : (
+    <main className="single-article">
+      <section className="article">
+        <h2>{singleArticle.title}</h2>
+        <p>{singleArticle.author}</p>
+        <p>{singleArticle.topic}</p>
+        <p>{singleArticle.created_at}</p>
+        <p>{singleArticle.votes} likes</p>
+        <p>{singleArticle.comment_count} comments</p>
+        <img
+          src={singleArticle.article_img_url}
+          alt="article thumbnail image"
+        />
+        <p>{singleArticle.body}</p>
+      </section>
+      <Comments />
+    </main>
+  );
 }

@@ -36,7 +36,7 @@ export default function SingleArticle({ singleArticle, setSingleArticle, isLoadi
         />
         <p>{singleArticle.body}</p>
       </section>
-      <Comments />
+      <Comments isLoading={isLoading} setIsLoading={setIsLoading} />
     </main>
   );
 }

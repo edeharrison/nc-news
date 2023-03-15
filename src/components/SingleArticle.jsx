@@ -42,7 +42,7 @@ export default function SingleArticle({ singleArticle, setSingleArticle, isLoadi
           <AiOutlineHeart />
         </h1>
       </section>
-      <Comments />
+      <Comments isLoading={isLoading} setIsLoading={setIsLoading} />
     </main>
   );
 }

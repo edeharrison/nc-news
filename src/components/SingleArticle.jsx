@@ -3,15 +3,19 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 // Components
-import Comments from './Comments.jsx'
-
-// Icons
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import Comments from "./Comments.jsx";
+import Likes from "./Likes.jsx";
 
 // Utils
 import { getSingleArticle } from "../utils/api";
 
-export default function SingleArticle({ articles, singleArticle, setSingleArticle, isLoading, setIsLoading }) {
+export default function SingleArticle({
+  articles,
+  singleArticle,
+  setSingleArticle,
+  isLoading,
+  setIsLoading,
+}) {
   const { article_id } = useParams();
 
   useEffect(() => {
@@ -22,11 +26,11 @@ export default function SingleArticle({ articles, singleArticle, setSingleArticl
     });
   }, [singleArticle]);
 
-  const comment_count = articles.map(article => {
+  const comment_count = articles.map((article) => {
     if (article.article_id === singleArticle.article_id) {
-      return article.comment_count
-    } 
-  })
+      return article.comment_count;
+    }
+  });
 
   return isLoading ? (
     <h1>Loading...</h1>
@@ -44,10 +48,8 @@ export default function SingleArticle({ articles, singleArticle, setSingleArticl
           alt="article thumbnail image"
         />
         <p>{singleArticle.body}</p>
-        <button className="like">
-          <AiOutlineHeart className="not-liked" />
-        </button>
       </section>
+      <Likes singleArticle={singleArticle} />
       <Comments isLoading={isLoading} setIsLoading={setIsLoading} />
     </main>
   );

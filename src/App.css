@@ -152,19 +152,23 @@ form.comments input[type="textarea"] {
 
 /* Article likes */
 
-.like {
+.likes {
   margin-top: 18px;
 }
 
-.like svg {
-  color: #fb3958;
-  font-size: 1.6rem;
-}
-
-.like {
+.likes .like {
   display: flex;
   align-items: center;
-  background: #e1e1e1;
+  background: none;
   color: #222;
+  padding: 0;
   border-bottom: 0;
 }
+
+.likes .like svg {
+  color: #fb3958;
+  font-size: 1.6rem;
+  margin-top: 5px;
+}
+
+

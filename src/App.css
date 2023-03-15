@@ -149,3 +149,22 @@ form.comments input[type="textarea"] {
   margin-bottom: 18px;
   min-height: 54px;
 }
+
+/* Article likes */
+
+.like {
+  margin-top: 18px;
+}
+
+.like svg {
+  color: #fb3958;
+  font-size: 1.6rem;
+}
+
+.like {
+  display: flex;
+  align-items: center;
+  background: #e1e1e1;
+  color: #222;
+  border-bottom: 0;
+}

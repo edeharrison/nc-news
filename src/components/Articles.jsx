@@ -8,8 +8,8 @@ import TopicsNav from "./TopicsNav.jsx";
 // Utils
 import { getArticles } from "../utils/api";
 
-export default function Articles({ setSingleArticle, isLoading, setIsLoading }) {
-  const [articles, setArticles] = useState([]);
+export default function Articles({ articles, setArticles, setSingleArticle, isLoading, setIsLoading }) {
+  
 
   useEffect(() => {
     getArticles().then((result) => {

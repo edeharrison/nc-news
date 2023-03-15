@@ -6,12 +6,12 @@ import { useParams } from "react-router-dom";
 import Comments from './Comments.jsx'
 
 // Icons
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 // Utils
 import { getSingleArticle } from "../utils/api";
 
-export default function SingleArticle({ singleArticle, setSingleArticle, isLoading, setIsLoading }) {
+export default function SingleArticle({ articles, singleArticle, setSingleArticle, isLoading, setIsLoading }) {
   const { article_id } = useParams();
 
   useEffect(() => {
@@ -21,6 +21,12 @@ export default function SingleArticle({ singleArticle, setSingleArticle, isLoadi
       setIsLoading(false);
     });
   }, [singleArticle]);
+
+  const comment_count = articles.map(article => {
+    if (article.article_id === singleArticle.article_id) {
+      return article.comment_count
+    } 
+  })
 
   return isLoading ? (
     <h1>Loading...</h1>
@@ -32,15 +38,15 @@ export default function SingleArticle({ singleArticle, setSingleArticle, isLoadi
         <p>{singleArticle.topic}</p>
         <p>{singleArticle.created_at}</p>
         <p>{singleArticle.votes} likes</p>
-        <p>{singleArticle.comment_count} comments</p>
+        <p>{comment_count} comments</p>
         <img
           src={singleArticle.article_img_url}
           alt="article thumbnail image"
         />
         <p>{singleArticle.body}</p>
-        <h1>
-          <AiOutlineHeart />
-        </h1>
+        <button className="like">
+          <AiOutlineHeart className="not-liked" />
+        </button>
       </section>
       <Comments isLoading={isLoading} setIsLoading={setIsLoading} />
     </main>

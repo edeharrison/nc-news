@@ -19,9 +19,11 @@ export default function Comments({ isLoading, setIsLoading }) {
 
   return isLoading ? (
     <h1>Loading...</h1>
+  ) : comments.length === 0 ? (
+    <h2>No comments</h2>
   ) : (
     <ul className="comments">
-        <h2>Comments</h2>
+      <h2>Comments</h2>
       {comments.map((comment) => {
         return (
           <li key={comment.comment_id}>

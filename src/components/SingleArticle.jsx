@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 // Components
 import Comments from './Comments.jsx'
 
+// Icons
+import { AiOutlineHeart } from "react-icons/ai";
+
 // Utils
 import { getSingleArticle } from "../utils/api";
 
@@ -35,6 +38,9 @@ export default function SingleArticle({ singleArticle, setSingleArticle, isLoadi
           alt="article thumbnail image"
         />
         <p>{singleArticle.body}</p>
+        <h1>
+          <AiOutlineHeart />
+        </h1>
       </section>
       <Comments />
     </main>

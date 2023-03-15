@@ -23,3 +23,11 @@ export const getSingleArticle = (article_id) => {
       console.log(error);
     });
 };
+
+export const getComments = (article_id) => {
+  return ncNewsAPI
+    .get(`/articles/${article_id}/comments`)
+    .then(({ data }) => {
+      return data
+    })
+}

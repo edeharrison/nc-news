@@ -1,5 +1,5 @@
 // Hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Icons
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
@@ -17,6 +17,7 @@ export default function ({ singleArticle }) {
     setIsLikeError(false);
     // toggles between icons
     setIsLiked(!isLiked);
+
     if (!isLiked) {
       setLikeCount(1);
       likeArticle(singleArticle.article_id)
@@ -26,8 +27,7 @@ export default function ({ singleArticle }) {
       });
     } else {
       setLikeCount(0);
-      unlikeArticle(singleArticle.article_id)
-      .catch(() => {
+      unlikeArticle(singleArticle.article_id).catch(() => {
         setLikeCount(1);
         setIsLikeError(false);
       });
@@ -52,12 +52,3 @@ export default function ({ singleArticle }) {
     </section>
   );
 }
-
-// when setting votes
-// setVotes((currVotes) => {
-//    return currVotes += 1
-// })
-
-// don't OR comment
-
-// add a catch (and maybe then)

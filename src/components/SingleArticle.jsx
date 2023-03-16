@@ -1,5 +1,5 @@
 // Hooks
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 // Components
@@ -55,7 +55,7 @@ export default function SingleArticle({
           singleArticle={singleArticle}
           setSingleArticle={setSingleArticle}
         />
-        <PostComment />
+        <PostComment singleArticle={singleArticle}/>
         <Comments isLoading={isLoading} setIsLoading={setIsLoading} />
       </div>
     </main>

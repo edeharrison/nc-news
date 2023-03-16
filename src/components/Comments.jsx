@@ -23,7 +23,7 @@ export default function Comments({ isLoading, setIsLoading }) {
     <h2>No comments</h2>
   ) : (
     <ul className="comments">
-      <h2>Comments</h2>
+      <h2>{comments.length} comments</h2>
       {comments.map((comment) => {
         return (
           <li key={comment.comment_id}>

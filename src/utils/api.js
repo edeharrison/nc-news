@@ -51,3 +51,15 @@ export const unlikeArticle = (article_id) => {
       return data;
     });
 };
+
+export const postComment = (newComment, article_id) => {
+  return ncNewsAPI
+    .post(`/articles/${article_id}/comments`, {
+      username: "cooljmessy",
+      body: newComment,
+      article_id,
+    })
+    .then(({ data }) => {
+      return data
+    });
+};

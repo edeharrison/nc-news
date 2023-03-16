@@ -1,17 +1,22 @@
 // Hooks
 import { useState } from "react";
 
-export default function ({setLatestComment}) {
+// Utils
+import { postComment } from '../utils/api'
+
+export default function ({ singleArticle }) {
   const [newComment, setNewComment] = useState("");
 
   const handleChange = (e) => {
     setNewComment(e.target.value)
-    console.log(newComment)
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(value);
+    if (newComment) {
+      postComment(newComment, singleArticle.article_id);
+      setNewComment('')
+    } 
   };
 
   return (

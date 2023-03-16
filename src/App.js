@@ -11,6 +11,7 @@ import Articles from "./components/Articles.jsx";
 import SingleArticle from "./components/SingleArticle.jsx";
 
 function App() {
+  const [articles, setArticles] = useState([]);
   const [singleArticle, setSingleArticle] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -22,7 +23,8 @@ function App() {
           path="/"
           element={
             <Articles
-              setSingleArticle={setSingleArticle}
+              articles={articles}
+              setArticles={setArticles}
               isLoading={isLoading}
               setIsLoading={setIsLoading}
             />
@@ -32,6 +34,7 @@ function App() {
           path="/articles/:article_id"
           element={
             <SingleArticle
+              articles={articles}
               singleArticle={singleArticle}
               setSingleArticle={setSingleArticle}
               isLoading={isLoading}

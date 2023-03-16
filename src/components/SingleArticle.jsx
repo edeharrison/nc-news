@@ -36,21 +36,26 @@ export default function SingleArticle({
     <h1>Loading...</h1>
   ) : (
     <main className="single-article">
-      <section className="article">
-        <h2>{singleArticle.title}</h2>
-        <p>{singleArticle.author}</p>
-        <p>{singleArticle.topic}</p>
-        <p>{singleArticle.created_at}</p>
-        <p>{singleArticle.votes} likes</p>
-        <p>{comment_count} comments</p>
-        <img
-          src={singleArticle.article_img_url}
-          alt="article thumbnail image"
+      <div className="padding">
+        <section className="article">
+          <h2>{singleArticle.title}</h2>
+          <p>{singleArticle.author}</p>
+          <p>{singleArticle.topic}</p>
+          <p>{singleArticle.created_at}</p>
+          <p>{singleArticle.votes} likes</p>
+          <p>{comment_count} comments</p>
+          <img
+            src={singleArticle.article_img_url}
+            alt="article thumbnail image"
+          />
+          <p>{singleArticle.body}</p>
+        </section>
+        <Likes
+          singleArticle={singleArticle}
+          setSingleArticle={setSingleArticle}
         />
-        <p>{singleArticle.body}</p>
-      </section>
-      <Likes singleArticle={singleArticle} />
-      <Comments isLoading={isLoading} setIsLoading={setIsLoading} />
+        <Comments isLoading={isLoading} setIsLoading={setIsLoading} />
+      </div>
     </main>
   );
 }

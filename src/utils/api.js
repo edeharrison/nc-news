@@ -35,11 +35,19 @@ export const getComments = (article_id) => {
 export const likeArticle = (article_id) => {
   return ncNewsAPI
     .patch(`/articles/${article_id}`, {
-      
       inc_vote: 1
     })
     .then(({ data }) => {
-      console.log(data)
       return data
     })
 }
+
+export const unlikeArticle = (article_id) => {
+  return ncNewsAPI
+    .patch(`/articles/${article_id}`, {
+      inc_vote: -1,
+    })
+    .then(({ data }) => {
+      return data;
+    });
+};

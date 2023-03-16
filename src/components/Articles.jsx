@@ -1,6 +1,6 @@
 // Hooks
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 // Components
 import TopicsNav from "./TopicsNav.jsx";
@@ -8,9 +8,17 @@ import TopicsNav from "./TopicsNav.jsx";
 // Utils
 import { getArticles } from "../utils/api";
 
-export default function Articles({ articles, setArticles, setSingleArticle, isLoading, setIsLoading }) {
-  
+// Icons
+import { AiOutlineHeart, AiOutlineClockCircle } from "react-icons/ai";
+import { SlSpeech } from "react-icons/sl";
 
+export default function Articles({
+  articles,
+  setArticles,
+  setSingleArticle,
+  isLoading,
+  setIsLoading,
+}) {
   useEffect(() => {
     getArticles().then((result) => {
       setIsLoading(true);
@@ -22,31 +30,41 @@ export default function Articles({ articles, setArticles, setSingleArticle, isLo
   return isLoading ? (
     <h1>Loading...</h1>
   ) : (
-    <>
+    <main className="articles">
       <TopicsNav />
-      <ul className="articles">
+      <ul className="cards">
         {articles.map((article) => {
           return (
-            <li key={article.article_id}>
-              <h2>{article.title}</h2>
-              <p>{article.author}</p>
-              <p>{article.topic}</p>
-              <p>{article.created_at}</p>
-              <p>{article.votes} likes</p>
-              <p>{article.comment_count} comments</p>
-              <img
-                src={article.article_img_url}
-                alt="article thumbnail image"
-              />
-              <Link to={`/articles/${article.article_id}`}>
-                <button onClick={() => setSingleArticle(article.article_id)}>
-                  Read
-                </button>
-              </Link>
-            </li>
+            <Link to={`/articles/${article.article_id}`}>
+              <li key={article.article_id}>
+                <img
+                  src={article.article_img_url}
+                  alt="article thumbnail image"
+                />
+                <div className="under-img">
+                  <h2>{article.title}</h2>
+                  {/* <p className="topic">{(article.topic)[0].toUpperCase() + (article.topic).slice(1)}</p> */}
+                  <div className="stats">
+                    <p>
+                      <AiOutlineClockCircle />
+                      {/* {article.created_at} */}
+                      14/03/2023
+                    </p>
+                    <p>
+                      <AiOutlineHeart />
+                      {article.votes}
+                    </p>
+                    <p>
+                      <SlSpeech />
+                      {article.comment_count}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </Link>
           );
         })}
       </ul>
-    </>
+    </main>
   );
 }

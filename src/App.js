@@ -25,7 +25,6 @@ function App() {
             <Articles
               articles={articles}
               setArticles={setArticles}
-              setSingleArticle={setSingleArticle}
               isLoading={isLoading}
               setIsLoading={setIsLoading}
             />

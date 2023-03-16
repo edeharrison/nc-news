@@ -8,29 +8,28 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { likeArticle } from '../utils/api.js'
 import { unlikeArticle } from '../utils/api.js'
 
-export default function ({ singleArticle }) {
+export default function ({ singleArticle, setSingleArticle }) {
   const [isLiked, setIsLiked] = useState(false);
-  const [userVote, setUserVote] = useState(0)
 
   const handleLikeToggle = () => {
-    // if (!isLiked) {
+    if (!isLiked) {
       
-      // setSingleArticle({...singleArticle})
+      setSingleArticle({...singleArticle})
+      likeArticle(singleArticle.article_id)
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
+      setSingleArticle({ ...singleArticle, votes: singleArticle.votes - 1 });
+      unlikeArticle(singleArticle.article_id);
+    }
+      // setUserVote(1)
       // likeArticle(singleArticle.article_id)
-      // setIsLiked(true);
-    // } else {
-    //   setIsLiked(false);
-    //   // setSingleArticle({ ...singleArticle, votes: singleArticle.votes - 1 });
-    //   unlikeArticle(singleArticle.article_id);
-    // }
-    setUserVote(1)
-    likeArticle(singleArticle.article_id)
   }
 
   return (
     <section className="likes">
       <p>
-        <strong>{singleArticle.votes + userVote} likes</strong>
+        <strong>{singleArticle.votes} likes</strong>
       </p>
       <button className="like" onClick={handleLikeToggle}>
         {!isLiked ? <AiOutlineHeart /> : <AiFillHeart />}

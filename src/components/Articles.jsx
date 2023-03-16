@@ -15,7 +15,6 @@ import { SlSpeech } from "react-icons/sl";
 export default function Articles({
   articles,
   setArticles,
-  setSingleArticle,
   isLoading,
   setIsLoading,
 }) {
@@ -47,6 +46,11 @@ export default function Articles({
                   <div className="stats">
                     <p>
                       <AiOutlineClockCircle />
+                      {/* 
+                      --Where to put this?--
+                      const date = new Date(article.created_at) 
+                      date
+                      */}
                       {/* {article.created_at} */}
                       14/03/2023
                     </p>

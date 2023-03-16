@@ -81,8 +81,11 @@ ul.topics-nav {
 }
 
 ul.topics-nav li,
-main.articles ul.cards li .under-img p.topic {
+main.articles ul.cards li .under-img p.topic,
+section.post-comment form button {
   border: 2px solid #222;
+  background: none;
+  color: inherit;
   border-radius: 30px;
   padding: 7px 22px 8px;
   cursor: pointer;
@@ -90,7 +93,8 @@ main.articles ul.cards li .under-img p.topic {
   transition: 0.1s ease-in-out;
 }
 
-ul.topics-nav li:hover {
+ul.topics-nav li:hover,
+section.post-comment form button:hover {
   background: #222;
   color: white;
 }
@@ -261,4 +265,30 @@ form.comments input[type="textarea"] {
   color: #fb3958;
   font-size: 1.6rem;
   margin-top: 5px;
+}
+
+/* Post Comment */
+
+section.post-comment {
+  margin-top: 27px;
+}
+
+section.post-comment form {
+  margin-top: 9px;
+}
+
+section.post-comment form textarea {
+  width: 100%;
+  max-width: 600px;
+  min-height: 180px;
+  background: #f1f1f1;
+  border: none;
+  padding: 12px 10px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+section.post-comment form button {
+  display: block;
+  margin-top: 9px;
 }

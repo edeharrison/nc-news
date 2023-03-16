@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 // Components
 import Comments from "./Comments.jsx";
 import Likes from "./Likes.jsx";
+import PostComment from "./PostComment.jsx";
 
 // Utils
 import { getSingleArticle } from "../utils/api";
@@ -54,6 +55,7 @@ export default function SingleArticle({
           singleArticle={singleArticle}
           setSingleArticle={setSingleArticle}
         />
+        <PostComment />
         <Comments isLoading={isLoading} setIsLoading={setIsLoading} />
       </div>
     </main>

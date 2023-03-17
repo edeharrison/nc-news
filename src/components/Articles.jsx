@@ -1,6 +1,6 @@
 // Hooks
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 // Components
 import TopicsNav from "./TopicsNav.jsx";
@@ -8,9 +8,16 @@ import TopicsNav from "./TopicsNav.jsx";
 // Utils
 import { getArticles } from "../utils/api";
 
-export default function Articles({ setSingleArticle, isLoading, setIsLoading }) {
-  const [articles, setArticles] = useState([]);
+// Icons
+import { AiOutlineHeart, AiOutlineClockCircle } from "react-icons/ai";
+import { SlSpeech } from "react-icons/sl";
 
+export default function Articles({
+  articles,
+  setArticles,
+  isLoading,
+  setIsLoading,
+}) {
   useEffect(() => {
     getArticles().then((result) => {
       setIsLoading(true);
@@ -22,31 +29,49 @@ export default function Articles({ setSingleArticle, isLoading, setIsLoading }) 
   return isLoading ? (
     <h1>Loading...</h1>
   ) : (
-    <>
+    <main className="articles">
       <TopicsNav />
-      <ul className="articles">
+      <ul className="cards">
         {articles.map((article) => {
+          // refactor at some point (this date-formatting code exists in 2 other components)
+          const date = new Date(article.created_at);
+          const day = date.getDate();
+          const month = date.getMonth();
+          const year = date.getFullYear();
+          const created_at = `${day}/${month + 1}/${year}`;
+
           return (
-            <li key={article.article_id}>
-              <h2>{article.title}</h2>
-              <p>{article.author}</p>
-              <p>{article.topic}</p>
-              <p>{article.created_at}</p>
-              <p>{article.votes} likes</p>
-              <p>{article.comment_count} comments</p>
-              <img
-                src={article.article_img_url}
-                alt="article thumbnail image"
-              />
-              <Link to={`/articles/${article.article_id}`}>
-                <button onClick={() => setSingleArticle(article.article_id)}>
-                  Read
-                </button>
-              </Link>
-            </li>
+            <Link
+              key={article.article_id}
+              to={`/articles/${article.article_id}`}
+            >
+              <li>
+                <img
+                  src={article.article_img_url}
+                  alt="article thumbnail image"
+                />
+                <div className="under-img">
+                  <h2>{article.title}</h2>
+                  <div className="stats">
+                    <p>
+                      <AiOutlineClockCircle />
+                      {created_at}
+                    </p>
+                    <p>
+                      <AiOutlineHeart />
+                      {article.votes}
+                    </p>
+                    <p>
+                      <SlSpeech />
+                      {article.comment_count}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </Link>
           );
         })}
       </ul>
-    </>
+    </main>
   );
 }

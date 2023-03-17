@@ -1,14 +1,28 @@
 // Hooks
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 // Components
-import Comments from './Comments.jsx'
+import Comments from "./Comments.jsx";
+import Likes from "./Likes.jsx";
+import PostComment from "./PostComment.jsx";
+
+// Icons
+import { AiOutlineHeart, AiOutlineClockCircle } from "react-icons/ai";
+import { SlSpeech } from "react-icons/sl";
+import { CgProfile } from "react-icons/cg";
 
 // Utils
 import { getSingleArticle } from "../utils/api";
 
-export default function SingleArticle({ singleArticle, setSingleArticle, isLoading, setIsLoading }) {
+// refactor to use props, instead of passing all individual props
+export default function SingleArticle({
+  articles,
+  singleArticle,
+  setSingleArticle,
+  isLoading,
+  setIsLoading,
+}) {
   const { article_id } = useParams();
 
   useEffect(() => {
@@ -17,26 +31,61 @@ export default function SingleArticle({ singleArticle, setSingleArticle, isLoadi
       setSingleArticle(result);
       setIsLoading(false);
     });
-  }, [singleArticle]);
+  }, []);
+
+  const comment_count = articles.map((article) => {
+    if (article.article_id === singleArticle.article_id) {
+      return article.comment_count;
+    }
+  });
+
+  // refactor at some point (this date-formatting code exists in 2 other components)
+  const date = new Date(singleArticle.created_at);
+  const day = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+  const created_at = `${day}/${month + 1}/${year}`;
 
   return isLoading ? (
     <h1>Loading...</h1>
   ) : (
     <main className="single-article">
-      <section className="article">
-        <h2>{singleArticle.title}</h2>
-        <p>{singleArticle.author}</p>
-        <p>{singleArticle.topic}</p>
-        <p>{singleArticle.created_at}</p>
-        <p>{singleArticle.votes} likes</p>
-        <p>{singleArticle.comment_count} comments</p>
-        <img
-          src={singleArticle.article_img_url}
-          alt="article thumbnail image"
+      <div className="padding">
+        <section className="article">
+          <h1>{singleArticle.title}</h1>
+          <div className="stats">
+            <p>
+              <AiOutlineClockCircle />
+              {created_at}
+            </p>
+
+            <p>
+              <AiOutlineHeart />
+              {singleArticle.votes}
+            </p>
+            <p>
+              <SlSpeech />
+              {comment_count}
+            </p>
+            <p>
+              <CgProfile />
+              {singleArticle.author}
+            </p>
+            {/* <p>{singleArticle.topic}</p> */}
+          </div>
+          <img
+            src={singleArticle.article_img_url}
+            alt="article thumbnail image"
+          />
+          <p>{singleArticle.body}</p>
+        </section>
+        <Likes
+          singleArticle={singleArticle}
+          setSingleArticle={setSingleArticle}
         />
-        <p>{singleArticle.body}</p>
-      </section>
-      <Comments isLoading={isLoading} setIsLoading={setIsLoading} />
+        <PostComment singleArticle={singleArticle} />
+        <Comments isLoading={isLoading} setIsLoading={setIsLoading} />
+      </div>
     </main>
   );
 }

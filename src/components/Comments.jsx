@@ -19,7 +19,7 @@ export default function Comments({ isLoading, setIsLoading }) {
       setComments(result);
       setIsLoading(false);
     });
-  }, [comments]);
+  }, []);
 
   return isLoading ? (
     <h1>Loading...</h1>

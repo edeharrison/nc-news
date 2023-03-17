@@ -31,7 +31,7 @@ export default function SingleArticle({
       setSingleArticle(result);
       setIsLoading(false);
     });
-  }, [singleArticle]);
+  }, []);
 
   const comment_count = articles.map((article) => {
     if (article.article_id === singleArticle.article_id) {

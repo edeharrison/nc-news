@@ -9,6 +9,7 @@ import "./App.css";
 import Header from "./components/Header.jsx";
 import Articles from "./components/Articles.jsx";
 import SingleArticle from "./components/SingleArticle.jsx";
+import Footer from "./components/Footer.jsx";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -43,6 +44,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
     </div>
   );
 }

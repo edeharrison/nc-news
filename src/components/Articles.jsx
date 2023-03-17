@@ -33,26 +33,29 @@ export default function Articles({
       <TopicsNav />
       <ul className="cards">
         {articles.map((article) => {
+          // refactor at some point (this date-formatting code exists in 2 other components)
+          const date = new Date(article.created_at);
+          const day = date.getDate();
+          const month = date.getMonth();
+          const year = date.getFullYear();
+          const created_at = `${day}/${month + 1}/${year}`;
+
           return (
-            <Link to={`/articles/${article.article_id}`}>
-              <li key={article.article_id}>
+            <Link
+              key={article.article_id}
+              to={`/articles/${article.article_id}`}
+            >
+              <li>
                 <img
                   src={article.article_img_url}
                   alt="article thumbnail image"
                 />
                 <div className="under-img">
                   <h2>{article.title}</h2>
-                  {/* <p className="topic">{(article.topic)[0].toUpperCase() + (article.topic).slice(1)}</p> */}
                   <div className="stats">
                     <p>
                       <AiOutlineClockCircle />
-                      {/* 
-                      --Where to put this?--
-                      const date = new Date(article.created_at) 
-                      date
-                      */}
-                      {/* {article.created_at} */}
-                      14/03/2023
+                      {created_at}
                     </p>
                     <p>
                       <AiOutlineHeart />

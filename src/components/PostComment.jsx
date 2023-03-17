@@ -21,10 +21,12 @@ export default function ({ singleArticle }) {
 
   return (
     <section className="post-comment">
-      <h2>Post Comment</h2>
+      <h2>Add a comment</h2>
       <form onSubmit={handleSubmit}>
         <textarea value={newComment} onChange={handleChange}></textarea>
-        <button type="submit">Post comment</button>
+        {newComment &&
+        <button type="submit" className="comment-submit">Comment</button>
+        }
       </form>
     </section>
   );
